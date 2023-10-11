@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './models';
+import { AccountService } from './services';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'gestione-ricette';
+  user?: User | null;
+
+  constructor(private accountService: AccountService) {
+      this.accountService.user.subscribe(x => this.user = x);
+  }
+
+  logout() {
+      this.accountService.logout();
+  }
 }

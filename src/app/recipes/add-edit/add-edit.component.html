@@ -1,0 +1,54 @@
+<h1>{{title}}</h1>
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Title</label>
+            <input type="text" formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                <div *ngIf="f.title.errors.required">Title is required</div>
+            </div>
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label">Ingredients</label>
+            <input type="text" formControlName="ingredients" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ingredients.errors }" />
+            <div *ngIf="submitted && f.ingredients.errors" class="invalid-feedback">
+                <div *ngIf="f.ingredients.errors.required">Ingredients are required</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Date</label>
+            <input type="date" formControlName="date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" />
+            <div *ngIf="submitted && f.date.errors" class="invalid-feedback">
+                <div *ngIf="f.date.errors.required">Date is required</div>
+            </div>
+        </div>
+        <div class="mb-3 col">
+            <label class="form-label">Time</label>
+            <input type="text" formControlName="time" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.time.errors }" />
+            <div *ngIf="submitted && f.time.errors" class="invalid-feedback">
+                <div *ngIf="f.time.errors.required">Preparation time is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Description</label>
+            <textarea formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">Description is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <button [disabled]="submitting" class="btn btn-primary">
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+            Save
+        </button>
+        <a routerLink="/recipes" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+<div *ngIf="loading" class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+</div>

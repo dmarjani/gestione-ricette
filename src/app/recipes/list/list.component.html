@@ -1,6 +1,5 @@
 <h1>Recipes</h1>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Add Recipe</a>
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="mb-3 col">
@@ -29,7 +28,6 @@
         </button>
     </div>
 </form>
-
 <ng-container *ngIf="recipeResponse && recipeResponse.values">
 
     <table mat-table [dataSource]="dataSource" matSort>
@@ -77,6 +75,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
     </table>
     <mat-paginator 
         [length]="recipeResponse.totalElements"
@@ -86,4 +85,10 @@
         [pageIndex]="recipeResponse.pageIndex"
         (page)="onChangePage($event)">
     </mat-paginator>
+</ng-container>
+
+<ng-container *ngIf="!recipeResponse">
+    <div class="d-flex justify-content-center">
+        <span class="spinner-border spinner-border-lg align-center"></span>
+    </div>
 </ng-container>
